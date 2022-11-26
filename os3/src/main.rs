@@ -40,10 +40,12 @@ fn clear_bss() {
 pub fn rust_main() -> ! {
     clear_bss();
     logging::init();
-    println!("[kernel] Hello, world!");
     heap_alloc::init_heap();
+    info!("heap alloc finished !");
     trap::init();
+    info!("trap init finished !");
     loader::load_apps();
+    info!("Apps load finished !");
     trap::enable_timer_interrupt();
     timer::set_next_trigger();
     task::run_first_task();
